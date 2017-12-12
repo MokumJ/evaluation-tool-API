@@ -1,47 +1,47 @@
-// routes/recipes.js
+// routes/students.js
 const router = require('express').Router()
-const { Recipe } = require('../models')
+const { Student } = require('../models')
 const passport = require('../config/auth')
 
-router.get('/recipes', (req, res, next) => {
-  Recipe.find()
-    // Newest recipes first
+router.get('/students', (req, res, next) => {
+  Student.find()
+    // Newest students first
     .sort({ createdAt: -1 })
     // Send the data in JSON format
-    .then((recipes) => res.json(recipes))
+    .then((students) => res.json(students))
     // Throw a 500 error if something goes wrong
     .catch((error) => next(error))
   })
-  .get('/recipes/:id', (req, res, next) => {
+  .get('/students/:id', (req, res, next) => {
     const id = req.params.id
-    Recipe.findById(id)
-      .then((recipe) => {
-        if (!recipe) { return next() }
-        res.json(recipe)
+    Student.findById(id)
+      .then((student) => {
+        if (!student) { return next() }
+        res.json(student)
       })
       .catch((error) => next(error))
   })
-  .post('/recipes',
+  .post('/students',
     passport.authorize('jwt', { session: false }),
     (req, res, next) => {
-      let newRecipe = req.body
-      newRecipe.authorId = req.account._id
+      let newStudent = req.body
+      newStudent.authorId = req.account._id
 
-      Recipe.create(newRecipe)
-        .then((recipe) => res.json(recipe))
+      Student.create(newStudent)
+        .then((student) => res.json(student))
         .catch((error) => next(error))
     })
-  .put('/recipes/:id', (req, res, next) => {
+  .put('/students/:id', (req, res, next) => {
     const id = req.params.id
-    Recipe.findById(id)
-      .then((recipe) => {
-        if (!recipe) { return next() }
+    Student.findById(id)
+      .then((student) => {
+        if (!student) { return next() }
 
         const newData = req.body
 
-        recipe.update(newData)
-          .then((updatedRecipe) => {
-            res.json(updatedRecipe)
+        student.update(newData)
+          .then((updatedStudent) => {
+            res.json(updatedStudent)
           })
           .catch((error) => next(error))
       })

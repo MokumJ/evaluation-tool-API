@@ -1,20 +1,9 @@
-// models/recipe.js
+// models/student.js
 const mongoose = require('../config/database')
 const { Schema } = mongoose
 
-const ingredientSchema = new Schema({
-  amount: { type: String, required: false },
-  name: { type: String, required: true },
-  optional: { type: Boolean, required: true, 'default': false }
-})
 
-const cookingStepSchema = new Schema({
-  cookingTime: { type: Number, required: false }, // in minutes
-  title: { type: String, required: false },
-  description: { type: String, required: true }
-})
-
-const recipeSchema = new Schema({
+const studentSchema = new Schema({
   title: { type: String, required: true },
   summary: { type: String, required: true },
   photo: { type: String, default: 'http://via.placeholder.com/500x180?text=No%20Image' },
@@ -30,4 +19,4 @@ const recipeSchema = new Schema({
   updatedAt: { type: Date, default: Date.now }
 })
 
-module.exports = mongoose.model('recipes', recipeSchema)
+module.exports = mongoose.model('students', studentSchema)
