@@ -4,19 +4,18 @@ const { Schema } = mongoose
 
 
 const studentSchema = new Schema({
-  title: { type: String, required: true },
-  summary: { type: String, required: true },
-  photo: { type: String, default: 'http://via.placeholder.com/500x180?text=No%20Image' },
-  vegan: { type: Boolean, default: false },
-  vegetarian: { type: Boolean, default: false },
-  pescatarian: { type: Boolean, default: false },
-  cookingTime: { type: Number, required: false }, // in minutes
-  ingredients: [ingredientSchema],
-  cookingSteps: [cookingStepSchema],
-  likedBy: [{ type: Schema.Types.ObjectId, ref: 'users' }],
-  authorId: { type: Schema.Types.ObjectId, ref: 'users' },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
-})
+  name: { type: String, required: true },
+  photo: { type: String, required: true },
+  evaluations: [evaluationSchema],
+  batchNo: [batchSchema],
+});
+
+const evaluationSchema = new Schema({
+  color: { type: String, default: "green" },
+  date: { type: Date, default: Date.now },
+  context: { type: String, default: false },
+});
+
+
 
 module.exports = mongoose.model('students', studentSchema)
