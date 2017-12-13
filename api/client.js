@@ -2,7 +2,7 @@ import request from 'superagent'
 
 export default class ApiClient {
   defaultOptions = {
-    tokenStorageKey: 'recipeApiJWT'
+    tokenStorageKey: 'studentApiJWT'
   }
 
   constructor(host, options = {}) {
@@ -13,7 +13,7 @@ export default class ApiClient {
   // GET path
   //
   // Example:
-  //  api.get('/recipes')
+  //  api.get('/students')
   //    .then(res => console.log(res.body))
   //    .catch(err => console.log(err))
   //

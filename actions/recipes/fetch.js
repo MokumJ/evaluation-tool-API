@@ -6,7 +6,7 @@ export default () => {
   return dispatch => {
   dispatch(loading(true)) // ???
 
-    api.get('/recipes')
+    api.get('/students')
       .then(res => dispatch({ type: FETCHED_RECIPES, payload: res.body }))
       .catch(err => dispatch(loadError(err))) ???
 
