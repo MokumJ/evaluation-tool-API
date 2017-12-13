@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon --inspect .",
-    "seed": "node seed.js"
+    "seed": "node ./db/seed.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.1",
-    "superagent": "^3.8.1"
+    "superagent": "^3.8.2"
   }
 }
