@@ -4,7 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('./config/auth')
 
-const { students, users, sessions } = require('./routes')
+const { students, users, sessions, batches } = require('./routes')
 
 const PORT = process.env.PORT || 3030
 
@@ -18,6 +18,7 @@ let app = express()
   .use(students)
   .use(users)
   .use(sessions)
+  .use(batches)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
