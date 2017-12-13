@@ -12,20 +12,21 @@ router.get('/batches', (req, res, next) => {
   })
 
   .get('/batches/:id', (req, res, next) => {
-    const id = req.params.id
+   const id = req.params.id
 
-   Student.find({ batchId: id})
-      .then((student) => {
-    Batch.findById(id)
-      .then((batch) => {
-        if (!batch) { return next() }
-        batch.students = student
-        batch.save()
-        res.json(batch)
-      })
-      .catch((error) => next(error))
-  })
-  })
+  Student.find({ batchId: id})
+     .then((student) => {
+   Batch.findById(id)
+     .then((batch) => {
+       if (!batch) { return next() }
+       batch.students = student
+       batch.save()
+       res.json(batch)
+     })
+     .catch((error) => next(error))
+ })
+ })
+
   .post('/batches', authenticate, (req, res, next) => {
     let newBatch = req.body
 
