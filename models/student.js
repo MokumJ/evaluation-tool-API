@@ -10,7 +10,7 @@ const evaluationSchema = new Schema({
 const studentSchema = new Schema({
   name: { type: String, required: true },
   picture: { type: String, required: true },
-  batch_id: { type: Schema.Types.ObjectId, ref: 'batches' }
+  batchId: { type: Schema.Types.ObjectId, ref: 'batches' }
 });
 
 
