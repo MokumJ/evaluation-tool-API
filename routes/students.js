@@ -49,7 +49,10 @@ const authenticate = passport.authorize('jwt', { session: false })
         Student.findById(id)
          .then((student) => {
            if (!student) { return next() }
-           student.currentColor = (student.studentEval.sort({ evalDay: 1})[student.studentEval.length - 1].evalColor)
+
+           student.evaluation.unshift(evaluateStudent)
+
+           student.currentColor = (student.studentEval.sort({ date: 1})[student.evaluation.length - 1].color)
 
 
            Student.findByIdAndUpdate(id, { $set: student }, { new: true })

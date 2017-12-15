@@ -46,24 +46,22 @@ router.get('/batches', (req, res, next) => {
     var pickStudent = req.body.pickStudent
     var student = {}
 
-
-    function pick() {
-      if (odds(pickStudent, "red") / pickStudent.length < 0.5 && red.length > 0) {pick_student(red)}
-      else if (odds(pickStudent, "yellow") / pickStudent.length < 0.33 && yellow.length > 0) {pick_student(yellow)}
-      else {pick_student(green)}
-
-      function rand(currentColor) {
-      var rand = Math.floor(Math.random() * (currentColor.length))
-           pickStudent.push(currentColor[rand])
+    function pick_student(currentColor) {
+      var rand = Math.floor(Math.random() * (students.currentColor.length))
+           pickStudent.push(students.currentColor[rand])
            student = currentColor[rand]
          }
 
-      }
+
+    function pick() {
+        if (odds(pickStudent, 0) / pickStudent.length < 0.5 && red.length > 0) {pick_student(red)}
+        else if (odds(pickStudent, 1) / pickStudent.length < 0.33 && yellow.length > 0) {pick_student(yellow)}
+        else {pick_student(green)}
 
       pick()
       updatedBatch.pickStudent = pickStudent
-
-    Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
+    }
+      Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
        .then((batch) => res.json(student))
        .catch((error) => next(error))
   })
