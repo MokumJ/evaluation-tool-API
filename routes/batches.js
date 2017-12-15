@@ -53,13 +53,6 @@ router.get('/batches', (req, res, next) => {
          }
 
 
-    function pick() {
-        if (odds(pickStudent, 0) / pickStudent.length < 0.5 && red.length > 0) {pick_student(red)}
-        else if (odds(pickStudent, 1) / pickStudent.length < 0.33 && yellow.length > 0) {pick_student(yellow)}
-        else {pick_student(green)}
-
-      pick()
-      updatedBatch.pickStudent = pickStudent
     }
       Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
        .then((batch) => res.json(student))
