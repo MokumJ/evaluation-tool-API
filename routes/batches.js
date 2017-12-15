@@ -40,28 +40,24 @@ router.get('/batches', (req, res, next) => {
     const students = req.body.students
     var updatedBatch = req.body
 
-    var green = students.filter(student => student.evaluations[student.evaluations.length-1].color === 2)
-    var yellow = students.filter(student => student.evaluations[student.evaluations.length-1].color === 1)
-    var red = students.filter(student => student.evaluations[student.evaluations.length-1].color === 0)
+    var green = students.filter(student => student.currentColor === 2)
+    var yellow = students.filter(student => student.currentColor === 1)
+    var red = students.filter(student => student.currentColor === 0)
     var pickStudent = req.body.pickStudent
     var student = {}
 
-      function pick_student(color) {
-      var num = Math.floor(Math.random() * (color.length))
-           pickStudent.push(color[num].evaluations[color[num].evaluations.length-1].color)
-           student = color[num]}
 
-      function odds(pickStudent, color) {
-        return pickStudent.filter(pick => pick === color).length
-      }
+    function pick() {
+      if (odds(pickStudent, "red") / pickStudent.length < 0.5 && red.length > 0) {pick_student(red)}
+      else if (odds(pickStudent, "yellow") / pickStudent.length < 0.33 && yellow.length > 0) {pick_student(yellow)}
+      else {pick_student(green)}
 
-      function pick() {
-        if (pickStudent.length < 2 && red.length > 0) { picks_student(red) }
-        else {
-        if (odds(pickStudent, "red") / pickStudent.length < 0.5 && red.length > 0) {picks_student(red)}
-        else if (odds(pickStudent, "yellow") / pickStudent.length < 0.33 && yellow.length > 0) {picks_student(yellow)}
-        else {picks_student(green)}
-      }
+      function rand(currentColor) {
+      var rand = Math.floor(Math.random() * (currentColor.length))
+           pickStudent.push(currentColor[rand])
+           student = currentColor[rand]
+         }
+
       }
 
       pick()
