@@ -52,11 +52,12 @@ router.get('/batches', authenticate, (req, res, next) => {
 
 
 
+
         console.log(newStudents)
 
           const updatedBatch = {
             ...batch,
-            students: newStudents
+            students: newStudents,
 
           }
 
@@ -82,7 +83,7 @@ router.get('/batches', authenticate, (req, res, next) => {
 					picture: req.body.picture,
 					batchId: req.body.batchId,
 					evaluation: req.body.evaluation,
-          currentColor: req.body.currentColor,
+
 				});
 
 				const updatedBatch = {
