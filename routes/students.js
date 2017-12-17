@@ -5,6 +5,9 @@ const passport = require('../config/auth')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
+
+
+
   router.get('/students/:id', authenticate, (req, res, next) => {
         const id = req.params.id
 

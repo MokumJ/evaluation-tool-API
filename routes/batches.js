@@ -40,7 +40,6 @@ router.get('/batches', authenticate, (req, res, next) => {
         .then((batch) => {
           if(!batch) {return next()}
 
-        console.log(getEvaluation)
 
         const newStudents =  batch.students.map(student => {
             if ( student._id == currentStudent._id) {
@@ -49,6 +48,9 @@ router.get('/batches', authenticate, (req, res, next) => {
             }
           return student
         })
+
+
+
 
         console.log(newStudents)
 
@@ -73,7 +75,7 @@ router.get('/batches', authenticate, (req, res, next) => {
         .then((batch) => {
           if(!batch) {return next()}
 
-          let newStudents = batch.students;
+          let newStudents = batch.students
 
 				newStudents.push({
 					name: req.body.name,
