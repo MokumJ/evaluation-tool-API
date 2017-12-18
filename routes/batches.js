@@ -98,17 +98,17 @@ router.get('/batches', authenticate, (req, res, next) => {
       .catch((error) => next(error))
       })
 
-  .delete('/batches/:id_batch/:id_student', authenticate, (req, res, next) => {
-      const id_batch = req.params.id_batch
-      const id_student = req.params.id_student
+  .delete('/batches/:batchId/:studentId', authenticate, (req, res, next) => {
+      const batchId = req.params.batchId
+      const studentId = req.params.studentId
 
 
-      Batch.findById(id_batch)
+      Batch.findById(batchId)
         .then((batch) => {
           if(!batch) {return next()}
 
           const updatedStudents = batch.students.filter(function(student) {
-            return student._id != id_student
+            return student._id != studentId
           });
 
           console.log(updatedStudents)
@@ -117,7 +117,7 @@ router.get('/batches', authenticate, (req, res, next) => {
             students: updatedStudents
           }
 
-          Batch.findByIdAndUpdate(id_batch, { $set: updatedBatch }, { new: true })
+          Batch.findByIdAndUpdate(batchId, { $set: updatedBatch }, { new: true })
             .then((batch) => res.json(batch))
             .catch((error) => next(error))
 
